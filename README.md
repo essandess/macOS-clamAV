@@ -31,3 +31,7 @@ sudo port selfupdate
 sudo port -puN upgrade clamav clamav-server
 sudo -u clamav freshclam
 ```
+
+## Details
+
+Excluded files are set in [clamd.conf](./clamd.conf), including macOS SIP protected directories. Change this to scan all directories. The default scanned directory is `/`, every week early Sunday morning. Edit the bash command in [org.macports.clamdscan.plist](./org.macports.clamdscan.plist) and unload/load this plist to change this behavior.
