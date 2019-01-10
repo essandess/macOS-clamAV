@@ -39,7 +39,7 @@ macOS 10.14 Mojave includes new privacy protections under `System Preferences>Se
 * `/opt/local/bin/clamdscan`
 * `/opt/local/bin/clamscan`
 
-and possibly `/Applications/Utilities/Terminal.app` for command line scan calls. Dragging and dropping these files from the Finder app into the pane `System Preferences>Security & Privacy>Privacy>Full Disk Access` will grabt access.
+and possibly `/Applications/Utilities/Terminal.app` for command line scan calls. Dragging and dropping these files from the Finder app into the pane `System Preferences>Security & Privacy>Privacy>Full Disk Access` will grant access.
 
 ## Details
 
