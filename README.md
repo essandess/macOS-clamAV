@@ -36,10 +36,10 @@ sudo -u clamav freshclam
 
 macOS 10.14 Mojave includes new privacy protections under `System Preferences>Security & Privacy>Privacy>Full Disk Access` ("TCC"). Scanning files protected by TCC requires granting access to these binaries:
 * `/opt/local/sbin/clamd`
-* `/opt/local/sbin/clamdscan`
-* `/opt/local/sbin/clamscan`
+* `/opt/local/bin/clamdscan`
+* `/opt/local/bin/clamscan`
 
-and possibly `/Applications/Utilities/Terminal.app` for command line scan calls.
+and possibly `/Applications/Utilities/Terminal.app` for command line scan calls. Dragging and dropping these files from the Finder app into the pane `System Preferences>Security & Privacy>Privacy>Full Disk Access` will grabt access.
 
 ## Details
 
