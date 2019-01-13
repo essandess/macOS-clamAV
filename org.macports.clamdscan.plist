@@ -10,7 +10,7 @@
 	<array>
 		<string>/bin/bash</string>
  		<string>-c</string>
-	<string>export CLAMDSCAN_LOG=/opt/Quarantine ; /opt/local/bin/clamdscan --reload  &amp;&amp; ( /bin/test -d $CLAMDSCAN_LOG || /bin/mkdir -p $CLAMDSCAN_LOG ) &amp;&amp; /usr/bin/nice -n 15 /opt/local/bin/clamdscan --multiscan --quiet --fdpass --move=$CLAMDSCAN_LOG --log=/opt/local/var/log/clamav/clamdscan.log &apos;/&apos; </string>
+	<string>export CLAMDSCAN_QUARANTINE=/opt/Quarantine CLAMDSCAN_LOG=/opt/local/var/log/clamav/clamdscan.log ; /opt/local/bin/clamdscan --reload  &amp;&amp; ( /bin/test -d $CLAMDSCAN_QUARANTINE || /bin/mkdir -p $CLAMDSCAN_QUARANTINE ) &amp;&amp; ( /bin/test -d $CLAMDSCAN_LOG || /bin/mkdir -p $CLAMDSCAN_LOG ) &amp;&amp; echo &quot;Launch daemon org.macports.clamdscan started on `date` …&quot; >> $CLAMDSCAN_LOG &amp;&amp; /usr/bin/nice -n 15 /opt/local/bin/clamdscan --multiscan --quiet --fdpass --move=$CLAMDSCAN_QUARANTINE --log=$CLAMDSCAN_LOG &apos;/&apos; &amp;&amp; echo &quot;Launch daemon org.macports.clamdscan completed on `date`.&quot; >> $CLAMDSCAN_LOG || echo &quot;Launch daemon org.macports.clamdscan exited with error code $? on `date`.&quot; >> $CLAMDSCAN_LOG </string>
 	</array>
         <key>RunAtLoad</key>
         <false/>
