@@ -32,6 +32,15 @@ sudo port -puN upgrade clamav clamav-server
 sudo -u clamav freshclam
 ```
 
+## Mojave Privacy Protections
+
+macOS 10.14 Mojave includes new privacy protections under `System Preferences>Security & Privacy>Privacy>Full Disk Access` ("TCC"). Scanning files protected by TCC requires granting access to these binaries:
+* `/opt/local/sbin/clamd`
+* `/opt/local/bin/clamdscan`
+* `/opt/local/bin/clamscan`
+
+and possibly `/Applications/Utilities/Terminal.app` for command line scan calls. Dragging and dropping these files from the Finder app into the pane `System Preferences>Security & Privacy>Privacy>Full Disk Access` will grant access.
+
 ## Details
 
 Excluded files are set in [clamd.conf](./clamd.conf), including macOS SIP protected directories. Change this to scan all directories. The default scanned directory is `/`, every week early Sunday morning. Edit the bash command in [org.macports.clamdscan.plist](./org.macports.clamdscan.plist) and unload/load this plist to change this behavior.
