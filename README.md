@@ -24,7 +24,7 @@ sudo launchctl load -w /Library/LaunchDaemons/org.macports.freshclam.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.clamdscan.plist
 ```
 
-To update the `clamav` ehngine and database:
+To update the `clamav` engine and database:
 
 ```
 sudo port selfupdate
