@@ -1,6 +1,6 @@
 # macOS-clamAV
 
-A simple clamAV configuration for macOS with scheduled on-demand and on-access scanning of user `Downloads` and `Desktop` directories.
+A simple macOS clamAV configuration with scheduled volume scans and on-access scans of user `Downloads` and `Desktop` directories.
 
 This configures [clamAV](http://www.clamav.net) for macOS with regular on-demand scans and on-access scanning of user `Downloads` and `Desktop` directories.
 
