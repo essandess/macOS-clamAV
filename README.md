@@ -59,4 +59,5 @@ and possibly `/Applications/Utilities/Terminal.app` for command line scan calls.
 
 ## Details
 
-Excluded files are set in [clamd.conf](./clamd.conf), including macOS SIP protected directories. Change this to scan all directories. The default scanned directory is `/`, every week early Sunday morning. Edit the bash command in [org.macports.clamdscan.plist](./org.macports.clamdscan.plist) and unload/load this plist to change this behavior.
+Excluded files are set in [clamd.conf](./clamd.conf), including macOS SIP protected directories. Change this to scan all directories. The default scanned directory is `/`, every week early Sunday morning. Edit the bash command in [org.macports.clamdscan.plist](./org.macports.clamdscan.plist) and unload/load this plist to change this behavior. For example, change the shell variable `SCAN_TARGETS` to scan these volumes (using XML [compliant](http://xml.silmaril.ie/specials.html) quoted special characters to quote spaces in directory or file names):
+> `SCAN_TARGETS=(/ &quot;/Volumes/Server HD&quot;)`
