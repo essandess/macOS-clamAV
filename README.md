@@ -18,7 +18,7 @@ sudo install -m 644 ./org.macports.clamdscan.plist /Library/LaunchDaemons
 sudo mkdir -p /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
 sudo install -m 755 ./ClamdScanOnAccess.wrapper /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
 sudo install -m 644 ./org.macports.ClamdScanOnAccess.plist /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
-sudo install -m 644 ./org.macports.ClamdScanOnDemand.plist /Library/LaunchDaemons
+sudo install -m 644 ./org.macports.ClamdScanOnAccess.plist /Library/LaunchDaemons
 sudo mkdir /opt/local/share/clamav
 sudo chown -R clamav:clamav /opt/local/share/clamav
 sudo mkdir /opt/Quarantine
@@ -26,7 +26,7 @@ sudo -u clamav freshclam
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.clamd.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.freshclam.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.clamdscan.plist
-sudo launchctl load -w /Library/LaunchDaemons/org.macports.ClamdScanOnDemand.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.macports.ClamdScanOnAccess.plist
 ```
 
 To update the `clamav` engine and database:
