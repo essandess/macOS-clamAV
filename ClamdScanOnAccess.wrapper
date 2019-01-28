@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+# MacPorts daemondo support script
+#
+
+#
+# Init
+#
+prefix=/opt/local
+
+#
+# Start
+#
+Start()
+{
+    CLAMDSCAN_QUARANTINE=/opt/Quarantine
+    CLAMDSCANONACCESS_LOG=/opt/local/var/log/clamav/clamdscanonaccess.log
+    IFS=$'\n'
+    USER_HOMEDIRS=(`/usr/bin/dscacheutil -q user | /usr/bin/grep -A 3 -B 2 -e '^uid: 5\d\d' | /opt/local/bin/pcregrep -B 5 -e '^shell: (?!/usr/bin/false).*' | /opt/local/bin/pcregrep -A 5 -e '^name: (?!_).*' | /usr/bin/grep -e '^dir: .*/Users/' | /usr/bin/sed -E -e 's/^dir: //'`)
+    USER_DOWNLOADSDIRS=(`for d in ${USER_HOMEDIRS[@]}; do echo $d"/Downloads" ; done`)
+    USER_DESKTOPDIRS=(`for d in ${USER_HOMEDIRS[@]}; do echo $d"/Desktop" ; done`)
+
+    [ -d $CLAMDSCAN_QUARANTINE ] || /bin/mkdir -p $CLAMDSCAN_QUARANTINE
+    [ -d ${CLAMDSCANONACCESS_LOG%/*} ] || /bin/mkdir -p ${CLAMDSCANONACCESS_LOG%/*}
+    ( echo "Launch daemon org.macports.clamdscanonaccess started on `/bin/date` …" ; echo "Watched directories:" ) >> $CLAMDSCANONACCESS_LOG
+    ( for d in ${USER_DOWNLOADSDIRS[@]}; do echo "\t$d"; done ) >> $CLAMDSCANONACCESS_LOG
+    ( for d in ${USER_DESKTOPDIRS[@]}; do echo "\t$d"; done ) >> $CLAMDSCANONACCESS_LOG
+    /opt/local/bin/fswatch -0 -l 3 -e '/.DS_Store$' -r "${USER_DOWNLOADSDIRS[@]}" "${USER_DESKTOPDIRS[@]}" \
+        | while read -d "" event ; \
+          do \
+              ( echo "Scanning $event on `/bin/date`…" >> $CLAMDSCANONACCESS_LOG ;
+                /usr/bin/nice -n 5 /opt/local/bin/clamdscan --multiscan --quiet --fdpass --move=$CLAMDSCAN_QUARANTINE --log=$CLAMDSCANONACCESS_LOG "$event" \
+                    && echo "Done scanning $event on `/bin/date`." >> $CLAMDSCANONACCESS_LOG \
+                        || echo "clamdscan exited with error code $? on `/bin/date`." >> $CLAMDSCANONACCESS_LOG ; \
+              ) || true
+          done
+}
+
+#
+# Stop
+#
+Stop()
+{
+    /usr/bin/kill -SIGUSR1 `/usr/bin/pgrep -u root fswatch` 2>/dev/null
+}
+
+#
+# Restart
+#
+Restart()
+{
+    Stop
+    Start
+}
+
+#
+# Run
+#
+Run()
+{
+case $1 in
+  start  ) Start   ;;
+  stop   ) Stop    ;;
+  restart) Restart ;;
+  *      ) echo "$0: unknown argument: $1";;
+esac
+}
+
+#
+# Run a phase based on the selector
+#
+Run $1

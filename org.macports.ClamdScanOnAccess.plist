@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd" >
+<plist version='1.0'>
+<dict>
+<key>Label</key><string>org.macports.ClamdScanOnAccess</string>
+<key>ProgramArguments</key>
+<array>
+	<string>/opt/local/bin/daemondo</string>
+	<string>--label=ClamdScanOnAccess</string>
+	<string>--start-cmd</string>
+	<string>/opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess/ClamdScanOnAccess.wrapper</string>
+	<string>start</string>
+	<string>;</string>
+	<string>--stop-cmd</string>
+	<string>/opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess/ClamdScanOnAccess.wrapper</string>
+	<string>stop</string>
+	<string>;</string>
+	<string>--restart-cmd</string>
+	<string>/opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess/ClamdScanOnAccess.wrapper</string>
+	<string>restart</string>
+	<string>;</string>
+	<string>--pid=none</string>
+</array>
+<key>Disabled</key><true/>
+<key>KeepAlive</key><true/>
+<key>ProcessType</key>
+<string>Background</string>
+<key>UserName</key>
+<string>root</string>
+<key>GroupName</key>
+<string>_clamav</string>
+</dict>
+</plist>
