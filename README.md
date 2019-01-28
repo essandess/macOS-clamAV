@@ -37,11 +37,11 @@ sudo port -puN upgrade clamav clamav-server
 sudo -u clamav freshclam
 ```
 
-## Scheduled On-Demand Scans
+## Scheduled On-Demand Scanning
 
 On-Demand scanning is controlled with the launchd daemon [org.macports.clamdscan.plist](./org.macports.clamdscan.plist).
 
-## Scheduled On-Demand Scans
+## On-Access Scanning
 
 On-Access scanning via [fswatch](https://github.com/emcrisostomo/fswatch) is controlled with the Macports daemon script 
 [ClamdScanOnAccess.wrapper](./ClamdScanOnAccess.wrapper), itself invoked using the launchd daemon 
