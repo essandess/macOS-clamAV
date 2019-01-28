@@ -12,9 +12,9 @@ To install and configure:
 
 ```
 sudo port install clamav clamav-server fswatch pcregrep
-sudo install -b -B .orig ./clamd.conf /opt/local/etc
-sudo install -b -B .orig ./freshclam.conf /opt/local/etc
-sudo install ./org.macports.clamdscan.plist /Library/LaunchDaemons
+sudo install -m 644 -b -B .orig ./clamd.conf /opt/local/etc
+sudo install -m 644 -b -B .orig ./freshclam.conf /opt/local/etc
+sudo install -m 644 ./org.macports.clamdscan.plist /Library/LaunchDaemons
 sudo mkdir -p /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
 sudo install -m 755 ./ClamdScanOnAccess.wrapper /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
 sudo install -m 644 ./org.macports.ClamdScanOnAccess.plist /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
