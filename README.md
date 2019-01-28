@@ -1,8 +1,8 @@
 # macOS-clamAV
 
-A simple clamAV configuration for macOS with scheduled on-demand scanning.
+A simple clamAV configuration for macOS with scheduled on-demand and on-access scanning of user `Downloads` and `Desktop` directories.
 
-This configures [clamAV](http://www.clamav.net) for macOS with regular on-demand scans.
+This configures [clamAV](http://www.clamav.net) for macOS with regular on-demand scans and on-access scanning of user `Downloads` and `Desktop` directories.
 
 ## Installation and Configuration
 
@@ -11,10 +11,14 @@ This uses [MacPorts](https://www.macports.org). It is also easy to use [Homebrew
 To install and configure:
 
 ```
-sudo port install clamav clamav-server fswatch
+sudo port install clamav clamav-server fswatch pcregrep
 sudo install -b -B .orig ./clamd.conf /opt/local/etc
 sudo install -b -B .orig ./freshclam.conf /opt/local/etc
 sudo install ./org.macports.clamdscan.plist /Library/LaunchDaemons
+sudo mkdir -p /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
+sudo install -m 755 ./ClamdScanOnAccess.wrapper /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
+sudo install -m 644 ./org.macports.ClamdScanOnAccess.plist /opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess
+sudo install -m 644 ./org.macports.ClamdScanOnDemand.plist /Library/LaunchDaemons
 sudo mkdir /opt/local/share/clamav
 sudo chown -R clamav:clamav /opt/local/share/clamav
 sudo mkdir /opt/Quarantine
@@ -22,6 +26,7 @@ sudo -u clamav freshclam
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.clamd.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.freshclam.plist
 sudo launchctl load -w /Library/LaunchDaemons/org.macports.clamdscan.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.macports.ClamdScanOnDemand.plist
 ```
 
 To update the `clamav` engine and database:
@@ -31,6 +36,17 @@ sudo port selfupdate
 sudo port -puN upgrade clamav clamav-server
 sudo -u clamav freshclam
 ```
+
+## Scheduled On-Demand Scans
+
+On-Demand scanning is controlled with the launchd daemon [org.macports.clamdscan.plist](./org.macports.clamdscan.plist).
+
+## Scheduled On-Demand Scans
+
+On-Access scanning via [fswatch](https://github.com/emcrisostomo/fswatch) is controlled with the Macports daemon script 
+[ClamdScanOnAccess.wrapper](./ClamdScanOnAccess.wrapper), itself invoked using the launchd daemon 
+[org.macports.ClamdScanOnDemand.plist](./org.macports.ClamdScanOnDemand.plist). The `Downloads` and `Desktop` directories of 
+all active users are watched by default.
 
 ## Mojave Privacy Protections
 
