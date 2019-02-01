@@ -20,7 +20,9 @@
 	<string>/opt/local/etc/LaunchDaemons/org.macports.ClamdScanOnAccess/ClamdScanOnAccess.wrapper</string>
 	<string>restart</string>
 	<string>;</string>
-	<string>--pid=none</string>
+	<string>--pid=fileclean</string>
+	<string>--pidfile</string>
+	<string>/opt/local/var/run/clamav/clamdscanonaccess.pid</string>
 </array>
 <key>Disabled</key><true/>
 <key>KeepAlive</key><true/>
