@@ -30,7 +30,7 @@ Start()
     CLAMDSCAN_QUARANTINE=/opt/Quarantine
     CLAMDSCANONACCESS_LOG=${prefix}/var/log/clamav/clamdscanonaccess.log
     IFS=$'\n'
-    USER_HOMEDIRS=(`/usr/bin/dscacheutil -q user | /usr/bin/grep -A 3 -B 2 -E -e '^uid: (?:\d*5\d\d|\d{4,})' | ${prefix}/bin/pcre2grep -B 5 -e '^shell: (?!/usr/bin/false).*' | ${prefix}/bin/pcre2grep -A 5 -e '^name: (?!_).*' | /usr/bin/grep -e '^dir: .*/Users/' | /usr/bin/sed -e 's/^dir: //'`)
+    USER_HOMEDIRS=(`/usr/bin/dscacheutil -q user | /usr/bin/grep -A 3 -B 2 -E -e '^uid: (?:\d*5\d\d|\d{4,})' | ${prefix}/bin/pcregrep -B 5 -e '^shell: (?!/usr/bin/false).*' | ${prefix}/bin/pcregrep -A 5 -e '^name: (?!_).*' | /usr/bin/grep -e '^dir: .*/Users/' | /usr/bin/sed -e 's/^dir: //'`)
     USER_DOWNLOADSDIRS=(`for d in ${USER_HOMEDIRS[@]}; do echo $d"/Downloads" ; done`)
     USER_DESKTOPDIRS=(`for d in ${USER_HOMEDIRS[@]}; do echo $d"/Desktop" ; done`)
 
