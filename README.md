@@ -11,7 +11,7 @@ This uses [MacPorts](https://www.macports.org). It is also easy to use [Homebrew
 To install and configure:
 
 ```
-sudo port install clamav clamav-server fswatch pcregrep
+sudo port install clamav clamav-server fswatch pcre2
 sudo install -m 644 -b -B .orig ./clamd.conf /opt/local/etc
 sudo install -m 644 -b -B .orig ./freshclam.conf /opt/local/etc
 sudo install -m 644 ./org.macports.clamdscan.plist /Library/LaunchDaemons
