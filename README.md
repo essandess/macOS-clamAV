@@ -66,6 +66,6 @@ example, change the shell array variable `SCAN_TARGETS` to scan these volumes (u
 [compliant](http://xml.silmaril.ie/specials.html) quoted special characters to quote spaces in directory or file names):
 > `SCAN_TARGETS=(/ &quot;/Volumes/Server HD&quot;)`
 
-(Note that macOS sets the default volume name `/Volumes/Macintosh HD` as a symbolic link to `/`, and therefore this link name 
+Note that macOS sets the default volume name `/Volumes/Macintosh HD` as a symbolic link to `/`, and therefore this link name 
 will not be scanned unless `FollowDirectorySymlinks` is set in [clamd.conf](./clamd.conf), i.e., use `/` specifically to scan 
-the boot system.)
+the boot system.
