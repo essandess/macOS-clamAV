@@ -1,3 +1,13 @@
+# NOTICE
+
+This macOS [clamAV](http://www.clamav.net) repo is now part of [MacPorts](https://www.macports.org). The details below this notice are deprecated.
+
+To install:
+```
+sudo port install clamav-server
+sudo port load claav-server
+```
+
 # macOS-clamAV
 
 A simple macOS clamAV configuration with scheduled volume scans and on-access scans of user `Downloads` and `Desktop` directories.
