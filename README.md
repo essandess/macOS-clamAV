@@ -5,7 +5,7 @@ This macOS [clamAV](http://www.clamav.net) repo is now part of [MacPorts](https:
 To install:
 ```
 sudo port install clamav-server
-sudo port load claav-server
+sudo port load clamav-server
 ```
 
 # macOS-clamAV
